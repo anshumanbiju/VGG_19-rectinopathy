@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Patient</title>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <!-- <div class="container"> -->
+            <a class="navbar-brand" href="/">Patient Management</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/viewpatients">View Patients</a></li>
+            </ul>
+        <!-- </div> -->
+    </nav>
+
+    <!-- Flash Messages -->
+    <div class="container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert {{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    <!-- Add Patient Form -->
+    <div class="container">
+        <div class="card">
+            <h3 class="card-header">Add a New Patient</h3>
+            <div class="card-body">
+                <form method="POST" action="{{ url_for('add_patient') }}">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+
+                    <label for="name">Patient Name</label>
+                    <input type="text" id="name" name="name" required>
+
+                    <label for="admission_no">Admission Number</label>
+                    <input type="number" id="admission_no" name="admission_no" required>
+
+                    <label for="age">Age</label>
+                    <input type="number" id="age" name="age" required>
+
+                    <label for="blood_group">Blood Group</label>
+                    <select id="blood_group" name="blood_group" required>
+                        <option value="">-- Select Blood Group --</option>
+                        <option value="A+">A+ (A Positive)</option>
+                        <option value="A-">A- (A Negative)</option>
+                        <option value="B+">B+ (B Positive)</option>
+                        <option value="B-">B- (B Negative)</option>
+                        <option value="O+">O+ (O Positive)</option>
+                        <option value="O-">O- (O Negative)</option>
+                        <option value="AB+">AB+ (AB Positive)</option>
+                        <option value="AB-">AB- (AB Negative)</option>
+                    </select>
+
+                    <button type="submit" class="btn">Add Patient</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 Patient Management System. All Rights Reserved.</p>
+    </footer>
+</body>
+
+</html>

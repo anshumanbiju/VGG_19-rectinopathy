@@ -1,0 +1,28 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+
+{% extends 'base.html' %}
+
+{% block content %}
+<h2>List of Doctors</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Specialization</th>
+        <th>Contact</th>
+    </tr>
+    {% for doctor in doctors %}
+    <tr>
+        <td>{{ doctor.id }}</td>
+        <td>{{ doctor.name }}</td>
+        <td>{{ doctor.specialization }}</td>
+        <td>{{ doctor.contact }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="{{ url_for('add_patient') }}" class="btn">Add Patient</a>
+<a href="{{ url_for('view_patients') }}" class="btn">View Patients</a>
+{% endblock %}

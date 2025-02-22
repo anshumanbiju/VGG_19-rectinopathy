@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eye Disease Detection System</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Eye Disease Detection System</h1>
+        <p>
+            This system allows users to upload an eye fundus image to predict diseases like Diabetic Retinopathy, Cataract, and Glaucoma. 
+            Doctors can also view registered patients and manage their details.
+        </p>
+        
+        <a href="{{ url_for('login') }}" class="btn">Login</a>
+    </div>
+</body>
+</html>

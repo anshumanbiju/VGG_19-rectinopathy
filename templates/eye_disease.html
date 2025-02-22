@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eye Disease Classification</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Eye Disease Classification</h1>
+        <p>Upload an eye fundus image to get the classification results.</p>
+
+        <!-- Form for uploading image -->
+        <form action="{{ url_for('eye_disease') }}" method="post" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}  <!-- Includes CSRF Token -->
+
+            <label for="file">Choose an image:</label>
+            {{ form.file() }}
+            <button type="submit">{{ form.submit.label }}</button>
+        </form>
+
+        <!-- Display classification results -->
+        {% if confidence_scores %}
+            <h2>Prediction Confidence Scores:</h2>
+            <ul>
+                {% for label, confidence in confidence_scores.items() %}
+                    <li><strong>{{ label }}:</strong> {{ confidence|round(2) }}%</li>
+                {% endfor %}
+            </ul>
+
+            <h2>Predicted Class: <span class="result">{{ predicted_class }}</span></h2>
+        {% endif %}
+
+        <!-- Flash messages for errors -->
+        {% with messages = get_flashed_messages(with_categories=True) %}
+            {% if messages %}
+                <div class="flash-messages">
+                    {% for category, message in messages %}
+                        <p class="{{ category }}">{{ message }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        {% endwith %}
+    </div>
+</body>
+</html>

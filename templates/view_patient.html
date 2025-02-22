@@ -1,0 +1,31 @@
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+<h2>Registered Patients</h2>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>Admission No</th>
+        <th>Name</th>
+        <th>Age</th>
+        <th>Blood Group</th>
+    </tr>
+    {% for patient in patients %}
+    <tr>
+        <td>{{ patient.id }}</td>
+        <td>{{ patient.admission_no }}</td>
+        <td>{{ patient.name }}</td>
+        <td>{{ patient.age }}</td>
+        <td>{{ patient.blood_group }}</td>
+    </tr>
+    {% endfor %}
+</table>
+<a href="{{ url_for('eye_disease') }}" class="btn">Predict Eye Disease</a>
+{% endblock %}
